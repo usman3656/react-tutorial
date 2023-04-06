@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useState, useRef, useContext, useEffect} from 'react';
+import axios from '../api/axios';
+import AuthContext from '../context/AuthProvider';
+const LOGIN_URL = '/user/login';
 
 function Copyright(props) {
   return (
@@ -29,13 +33,58 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LoginPage() {
-  const handleSubmit = (event) => {
+
+  const {setAuth} = useContext(AuthContext);
+
+  // const userRef = useRef();
+  const errRef = useRef();
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [err, setErr] = useState('')
+
+
+  useEffect(() =>{
+
+    // userRef.current.focus();
+    console.log('user')
+  },[])
+
+  useEffect(() =>{
+    setErr('');
+  },[username, password])
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    try{
+      const response = await axios.post(LOGIN_URL,JSON.stringify({username,password}),
+      {
+        headers: { "Content-Type" : "application/json"} ,
+        //withCredentials : true
+      })
+      // console.log(response);
+      setUsername('');
+      setPassword('')
+      setAuth({username,password})
+
+      console.log(JSON.stringify(response?.data))
+
+    }
+    catch(err){
+
+      console.log("error ++")
+
+    }
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+    
+    
+    
   };
 
   return (
@@ -56,6 +105,7 @@ export default function LoginPage() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <p ref={errRef} className={err ? "errmsg" : "offscreen"} aria-live="assertive">{err}</p>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -66,16 +116,23 @@ export default function LoginPage() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e)=> {setUsername(e.target.value)}}
+              value = {username}
             />
             <TextField
               margin="normal"
               required
               fullWidth
+              // ref = {userRef}
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e)=> {setPassword(e.target.value)}}
+              value = {password}
+            
+
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
