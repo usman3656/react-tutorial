@@ -51,6 +51,13 @@ export default function SignUp() {
     country: "",
     role: "",
   });
+  const [message, setMessage] = useState("");
+
+  const setCookieFunction = (value) => {
+    localStorage.setItem("token", value);
+
+    setMessage("token set as cookie!!");
+  };
 
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState(false);
@@ -74,6 +81,8 @@ export default function SignUp() {
       });
 
       console.log(response);
+
+      setCookieFunction(JSON.stringify(response.data.token));
 
       setAuth({ data });
       setSuccess(true);
