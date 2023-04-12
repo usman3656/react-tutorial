@@ -35,14 +35,7 @@ const theme = createTheme();
 export default function VerifyPassword() {
   const { setAuth } = useContext(AuthContext);
   const emailref = useRef();
-
-  // const userRef = useRef();
   const errRef = useRef();
-
-  // const [data, setData] = useState({
-  //   password: "",
-  //   emaily: "",
-  // });
 
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState(false);
@@ -61,22 +54,19 @@ export default function VerifyPassword() {
       console.log(window.location.href); //yields: "https://stacksnippets.net/js"
       let urlElements = window.location.href.split("=");
       console.log(urlElements);
-      let urlElement = urlElements[1];
-      console.log(urlElement);
-      let temp = urlElements[3];
+      let token = urlElements[1];
 
-      // setData({ urlElement: "", emaily: temp });
-
-      console.log(temp);
       try {
-        const response = await axios.post(VERIFY_URL, JSON.stringify({ urlElement, emaily: temp }), {
+        const tok = localStorage.getItem("token");
+        console.log(tok);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${tok}`;
+
+        const response = await axios.post(VERIFY_URL, JSON.stringify({ token }), {
           headers: { "Content-Type": "application/json" },
-          //withCredentials : true
         });
 
         console.log(response);
         emailref.current = response.data;
-
         setAuthorized(true);
       } catch (err) {
         if (!err?.response) {
@@ -93,24 +83,20 @@ export default function VerifyPassword() {
   }, []);
 
   const HandleChange = ({ currentTarget: input }) => {
-    // setData({ ...data, password: input });
     setPassword({ [input.name]: input.value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
     console.log(password);
 
     try {
       const response = await axios.put(VERIFY_AGAIN_URL, JSON.stringify({ password, emaily: emailref.current }), {
         headers: { "Content-Type": "application/json" },
-        //withCredentials : true
       });
 
       console.log(response);
 
-      // setAuth({ data });
       setAuth(password);
       setSuccess(true);
 
@@ -126,7 +112,6 @@ export default function VerifyPassword() {
         setErr("Authentication Failed");
       }
     }
-    // console.log({ data });
   };
 
   return (
@@ -146,7 +131,7 @@ export default function VerifyPassword() {
               {success ? (
                 <Box sx={{ backgroundColor: "lightBlue", padding: "2rem" }}>
                   <div>
-                    <div>Email Sent!</div>
+                    <div>Password Changed</div>
 
                     <br />
                     <a href="/">Go to Home</a>

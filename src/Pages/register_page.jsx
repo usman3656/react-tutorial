@@ -14,7 +14,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AuthContext from "../context/AuthProvider";
 import { useEffect, useState, useContext, useRef } from "react";
-import { lightBlue } from "@mui/material/colors";
 import axios from "../api/axios";
 
 const SIGNUP_URL = "/user/register-login";
@@ -51,12 +50,9 @@ export default function SignUp() {
     country: "",
     role: "",
   });
-  const [message, setMessage] = useState("");
 
   const setCookieFunction = (value) => {
     localStorage.setItem("token", value);
-
-    setMessage("token set as cookie!!");
   };
 
   const [err, setErr] = useState("");
@@ -77,12 +73,11 @@ export default function SignUp() {
     try {
       const response = await axios.post(SIGNUP_URL, JSON.stringify({ data }), {
         headers: { "Content-Type": "application/json" },
-        //withCredentials : true
       });
 
-      console.log(response);
+      console.log(response.data, response.message);
 
-      setCookieFunction(JSON.stringify(response.data.token));
+      setCookieFunction(response.data.token);
 
       setAuth({ data });
       setSuccess(true);

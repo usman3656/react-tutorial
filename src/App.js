@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import HomePage from "./Pages/home_page";
 import ShopPage from "./Pages/shop_page";
 import LoginPage from "./Pages/login_page";
 import Register from "./Pages/register_page";

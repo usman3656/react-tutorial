@@ -54,12 +54,12 @@ export default function ForgotPassword() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
 
     try {
-      const response = await axios.post(FORGOT_URL, JSON.stringify({ data }), {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(FORGOT_URL, JSON.stringify({ data, token }), {
         headers: { "Content-Type": "application/json" },
-        //withCredentials : true
       });
 
       console.log(response);

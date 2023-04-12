@@ -42,18 +42,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState(false);
-  const [message, setMessage] = useState("");
 
   const setCookieFunction = (value) => {
     localStorage.setItem("token", value);
-
-    setMessage("token set as cookie!!");
   };
-
-  useEffect(() => {
-    // userRef.current.focus();
-    console.log("user");
-  }, []);
 
   useEffect(() => {
     setErr("");
@@ -66,19 +58,15 @@ export default function LoginPage() {
     try {
       const response = await axios.post(LOGIN_URL, JSON.stringify({ username, password }), {
         headers: { "Content-Type": "application/json" },
-        //withCredentials : true
       });
-      // console.log(response);
       setUsername("");
       setPassword("");
       setAuth({ username, password });
       setSuccess(true);
 
-      console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify(response.data));
 
-      console.log(JSON.stringify(response.data.token));
-
-      setCookieFunction(JSON.stringify(response.data.token));
+      setCookieFunction(response.data.token);
     } catch (err) {
       if (!err?.response) {
         setErr("No Server Response");
