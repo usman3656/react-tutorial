@@ -1,5 +1,54 @@
+.sellerForm-label{
+width: 200px;
+}
+.sellerForm-input{
+  width: 350px;
+}
+.sellerForm-inputwithText{
+  width: 304px;
+}
+
+input[type=file]::file-selector-button {
+  background-color: #02471350;
+  content: 'Add your files' !important;
+}
+
+.cart-img{
+  height: 70px;
+  width: 70px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.categories{
+  width: 18rem;
+  height: 10rem;
+}
+.products{
+  width: 30rem;
+  height:7rem
+}
+.products img{
+  height:90px;
+  width:130px;
+}
+
+.carousel-img{
+  height: 300px; 
+  object-fit: contain;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
+
+
+
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
