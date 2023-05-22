@@ -53,7 +53,7 @@ function Cart() {
                                     <div className='col-8'>                            
                                         <span className='mx-3 col-7'>{item.productName}</span>
                                     </div>
-                                    <div className='d-flex justify-content-end align-items-center col-2'>
+                                    <div className='d-flex justify-content-end align-items-center col-3'>
                                         <span className='ms-3'>Rs. {item.productPrice}</span>                            
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@ function Cart() {
                         ))}
                         <div className='d-flex justify-content-between m-3'>
                             <div className='fw-bold'>Delivery Fee: </div>
-                            <div className='me-5 pe-4'>Rs. 300</div>                        
+                            <div className='me-4 pe-2'>Rs. 300</div>                        
                         </div>
                         <hr/>
                         <div className='d-flex justify-content-between m-3 pb-2'>

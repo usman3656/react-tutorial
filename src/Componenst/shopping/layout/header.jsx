@@ -34,10 +34,10 @@ function Header() {
                 </Link>
                 
                 {/* Next part will have a link to user profile */}
-                <div className=''> 
+                <Link to='profile' className=''> 
                     <img src={profile} alt='' width='55' height='55' className='rounded-circle me-2' />                        
                     <span className='pt-3 fs-5 text-success'>Usman</span>
-                </div>
+                </Link>
 
                 {/* This login button will be displayed instead of profile if not logged in */}
                 {/* <div className='btn btn-success me-4 px-4'> LOGIN </div> */}
