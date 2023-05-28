@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 function Cart() {
     const { cartItems,cartTotal,clearItemFromCart } = useContext(CartContext);
@@ -75,7 +76,9 @@ function Cart() {
                 }
             </div>
             <div className='d-flex justify-content-end pe-4 m-4 '>
-                <button className='btn btn-success'> Checkout </button>
+                <Link to={'/checkout'}>
+                    <button className='btn btn-success'> Checkout </button>                        
+                </Link>
             </div>
         </div>
     </div>

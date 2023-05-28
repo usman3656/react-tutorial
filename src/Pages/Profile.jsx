@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import ProfileImage from '../profile.jpg';
 import { AiOutlineClose } from 'react-icons/ai';
+import userData from '../utils/userData';
 
 function Profile() {
   const UserName= 'Usman Ghani Bawany';
   const [data, setData] = useState({
-    firstName: 'Usman',
-    lastName: 'Ghani Bawany',
-    userName: 'usman420@gmail.com',
-    phone: 8457926529,
-    address: 'IBA,Maskan',
-    city: 'Karachi',
-    country: 'Pakistan',
-    role: 'User'
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    userName: userData.userName,
+    phone: userData.phone,
+    address: userData.address,
+    city: userData.city,
+    country: userData.country,
+    role: userData.role
   });
   return (
     <div className='col-8 offset-2'>      
