@@ -1,9 +1,26 @@
-import React from 'react';
-import products from '../utils/products'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+// import products from '../utils/products'
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai';
 
 function SellerProducts() {
+    const [products, setProducts] = useState([]);
+    const sellerID='64384b08e5912cec3662aa18';
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+        try {
+            const response = await axios.get(`/user/get-productbyseller/${sellerID}`);
+            setProducts(response.data.product);
+        } catch (error) {
+            console.log(error);
+        }
+        };
+
+        fetchProducts();
+    }, []);
+
   return (
     <div className='m-4'>        
         <div className='row'>

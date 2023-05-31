@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import electronics from '../electronics.jpg'
 import clothing from '../clothing.jpg'
 import accessories from '../accessories.jpg'
@@ -9,10 +9,6 @@ import { useState } from 'react';
 function LandingPage() {
 
   const [categ,setCateg]=useState(null);
-
-  useEffect(() => {
-    // console.log('Selected category:', categ);
-  }, [categ]);
 
   const handleCategory=(categ)=>{    
     setCateg(categ);
