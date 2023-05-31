@@ -1,11 +1,35 @@
-import React from 'react';
-import products from '../utils/products';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function Products() {  
+function Products({categ}) {  
+  const [products, setProducts] = useState([]);  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let response;
+        console.log('this'+categ);
+        if(categ==null)
+          {
+            response = await axios.get(`/user/get-products`);
+          }
+        else 
+          {
+            console.log('categ api');
+            response = await axios.get(`/user/get-productbycateg/${categ}`);
+          }
+        setProducts(response.data.product);
+      } catch (error) {
+        console.log('Error fetching products:', error);
+      }
+    };
+    fetchData();
+  }, [categ]);
+
   return (
     <div className='my-4'>
-        <span className='fw-bold m-2'>ALL CATEGORIES</span>
+        <span className='fw-bold m-2'>{categ?categ.toUpperCase():'ALL CATEGORIES'}</span>
         <br/>
         {products.map((product)=>(
         <Link to={`/product/${product._id}`} key={product._id}>

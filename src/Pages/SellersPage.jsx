@@ -27,7 +27,6 @@ function SellersPage() {
         try {
           const response = await axios.post('/user/add-product', productData);
           console.log('Product added successfully:', response.data);
-          // Reset the form or perform any other actions after successful submission
         } catch (error) {
           console.error('Error adding product:', error);
           if (error.response) {
@@ -57,7 +56,7 @@ function SellersPage() {
                 <select className="form-select sellerForm-input" aria-label="Default select example" value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option selected>Select Category</option>
                     <option value="Electronics">Electronics</option>
-                    <option value="CLothing">Clothing</option>
+                    <option value="Clothing">Clothing</option>
                     <option value="Accessories">Accessories</option>
                     <option value="Motors">Motors</option>
                 </select>

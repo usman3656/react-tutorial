@@ -1,16 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import products from '../utils/products'
+// import products from '../utils/products'
 import { CartContext } from '../context/CartContext';
+import axios from 'axios';
 
 function Product() {
-    const { addItemToCart } = useContext(CartContext);
+    const { addItemToCart } = useContext(CartContext);    
+    const { id } = useParams();   
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+        try {
+            const response = await axios.get(`/user/get-products/${id}`);
+            setProduct(response.data.product);
+        } catch (error) {
+            console.log('Error fetching product:', error);
+        }
+        };
+        fetchProduct();
+    }, [id]);
+
     const addProductToCart = () => addItemToCart(product);
-    const { id } = useParams();
-    const product = products.find((product) => product._id === id); // this will be updated after api integration
+    
     if (!product) {
         return <div>Product not found</div>;
-      }
+        }
+
   return (
     <div className='d-flex gap-5 justify-content-center align-items-center'>
         <div id="carouselIndicators" className="carousel slide col-4">

@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import electronics from '../electronics.jpg'
 import clothing from '../clothing.jpg'
 import accessories from '../accessories.jpg'
 import motors from '../motors.jpg'
 import Products from '../Componenst/Products';
+import { useState } from 'react';
 
 function LandingPage() {
+
+  const [categ,setCateg]=useState(null);
+
+  useEffect(() => {
+    // console.log('Selected category:', categ);
+  }, [categ]);
+
+  const handleCategory=(categ)=>{    
+    setCateg(categ);
+    handleScrollToBottom();
+  }
+
+  const handleScrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
   const categories=[
     {
       name:"Electronics",
@@ -28,14 +48,14 @@ function LandingPage() {
   return (
     <div>
       {categories.map((category,index)=>(
-        <button className='btn' key={index}>
+        <button className='btn' key={index} onClick={()=>handleCategory(category.name)}>
           <div className="card shadow categories">
             <img src={category.image} className="card-img-top" alt="..."/>            
             <h4 className='fw-bold'>{category.name}</h4>
           </div>
-      </button>
+        </button>
       ))}
-      <Products/>
+      <Products categ={categ}/>
     </div>
   )
 }
