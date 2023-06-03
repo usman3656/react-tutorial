@@ -31,7 +31,9 @@ function Products({categ}) {
     <div className='my-4'>
         <span className='fw-bold m-2'>{categ?categ.toUpperCase():'ALL CATEGORIES'}</span>
         <br/>
-        {products.map((product)=>(
+        {console.log(products)}
+
+         {products.map((product)=>(
         <Link to={`/product/${product._id}`} key={product._id}>
             <button className='btn mt-2' >
                 <div className="card shadow">
@@ -44,7 +46,7 @@ function Products({categ}) {
                 </div>
             </button>
         </Link>
-      ))}
+      ))} 
               
     </div>
   )
