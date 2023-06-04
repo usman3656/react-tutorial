@@ -7883,11 +7883,6 @@ react-bootstrap@^2.7.2:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
-react-city-picker@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-city-picker/-/react-city-picker-1.0.6.tgz#78d1c84f85fe0a89d6dae191fff0563c1bd05b2b"
-  integrity sha512-C75oypgfuyI4tIrMkp1UWnxoLSGuQm9zUk/G24hGj5ZFE3DBetiC3m6xe4cQglO/9wgRrTg+VX1Oj99lAkKoLA==
-
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-12.0.1.tgz#ba92edb4a1f379bd46ccd6bcd4e7bc398df33e73"
