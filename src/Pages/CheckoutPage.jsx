@@ -16,6 +16,7 @@ function CheckoutPage() {
   const [orderno,setOrderno]=useState(12345);
   const [Comments,setComments]=useState('');
   const [type,setType]=useState('');
+  const [order,setOrder]=useState('');
 
   const id='643689de643a5e73aa5e56b2'//'64384b08e5912cec3662aa18' //will be changed after signin details stored
   const [data, setData] = useState({
@@ -105,6 +106,7 @@ function CheckoutPage() {
   
       const response = await axios.post('/user/create-order', orderData);
       const createdOrder = response.data.order;
+      setOrder(createOrder);
   
       setOrderno(createdOrder.orderNo); // Update the order number state variable
   

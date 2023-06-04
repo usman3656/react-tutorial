@@ -3,6 +3,7 @@ import ProfileImage from '../profile.jpg';
 import { AiOutlineClose } from 'react-icons/ai';
 import userData from '../utils/userData';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Profile() {
   const id='643689de643a5e73aa5e56b2'//'64384b08e5912cec3662aa18' //will be changed after signin details stored
@@ -107,6 +108,9 @@ function Profile() {
             <img src={ProfileImage} alt={data.username} className='rounded-circle'/>
             <h4 className='mt-3'>{data.firstName +' '+ data.lastName}</h4>
             <h5 className='text-secondary'>{data.role}</h5>
+            <Link to={'/order'}>
+              <button className='btn btn-primary mt-4'>View Orders</button>
+            </Link>
           </div>
           <div className='col-8 offset-md-1'>
             <div className='d-flex col-8 mt-2'>

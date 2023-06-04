@@ -15,6 +15,7 @@ import UpdateProduct from "./Pages/UpdateProduct";
 import Cart from "./Componenst/Cart";
 import Profile from "./Pages/Profile";
 import AddressPage from "./Pages/CheckoutPage";
+import OrdersPage from "./Pages/OrdersPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path='cart' element={<Cart/>}/>
             <Route path='checkout' element={<AddressPage/>}/>
             <Route path='profile' element={<Profile/>}/>
+            <Route path='order' element={<OrdersPage/>}/>
             <Route path='seller' element={<SellerProducts/>}/>
             <Route path='seller/add-product' element={<SellersPage/>}/>
             <Route path='seller/update-product/:id' element={<UpdateProduct/>}/>
