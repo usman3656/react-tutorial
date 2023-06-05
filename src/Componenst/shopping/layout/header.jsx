@@ -62,7 +62,7 @@ function Header() {
                     <div className='btn-group'>
                         <div className='dropdown-toggle' data-bs-toggle="dropdown" aria-expanded="false">
                             <img src={profile} alt='' width='55' height='55' className='rounded-circle me-2' />                        
-                            <span className='pt-3 fs-5 text-success btn'>Usman</span>
+                            <span className='pt-3 fs-5 text-success btn'>{localStorage.getItem('firstName')}</span>
                         </div>
                         <ul class="dropdown-menu">
                             <Link to='profile' className=''>

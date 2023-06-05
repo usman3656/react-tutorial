@@ -77,7 +77,7 @@ export default function LoginPage() {
       // console.log(JSON.stringify(response.data));
 
       setCookieFunction(response.data);
-      window.history.back();
+      response.data.data.role==='Admin'?window.location.href = '/admin':window.location.href='/';
     } catch (err) {
       if (!err?.response) {
         setErr("No Server Response");
