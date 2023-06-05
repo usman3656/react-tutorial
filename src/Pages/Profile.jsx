@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ProfileImage from '../profile.jpg';
 import { AiOutlineClose } from 'react-icons/ai';
+import {FiLogOut} from 'react-icons/fi'
 import userData from '../utils/userData';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function Profile() {
-  const id='643689de643a5e73aa5e56b2'//'64384b08e5912cec3662aa18' //will be changed after signin details stored
+  // const id='643689de643a5e73aa5e56b2'//'64384b08e5912cec3662aa18' //will be changed after signin details stored
+  const id=localStorage.getItem('userID');    
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -94,10 +96,17 @@ function Profile() {
         city: updatedUser.city,
         country: updatedUser.country
       }));
+      localStorage.setItem('address',updatedData.address);
+      localStorage.setItem('firstName',updatedData.firstName);
+      localStorage.setItem('lastName',updatedData.lastName);
+      localStorage.setItem('username',updatedData.username);
+      localStorage.setItem('phone',updatedData.phone);
+      localStorage.setItem('city',updatedData.city);
+      localStorage.setItem('country',updatedData.country);
     } catch (error) {
       console.log('Error updating profile:', error);
     }
-  };
+  };  
   
   return (
     <div className='col-8 offset-2'>      
@@ -141,8 +150,8 @@ function Profile() {
               <label className='mx-2 pe-3'>Country: </label>
               <input className='form-control' placeholder={data.country} name='country' value={updatedData.country} onChange={handleInputChange}></input>
             </div>
-            <div className='d-flex justify-content-end col-5 ms-5 mt-4'>
-                <button type='button' className='btn btn-success ms-auto px-5' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={handleUpdateProfile}> Update </button>
+            <div className='d-flex justify-content-end col-6 ms-5 mt-4'>
+                <button type='button' className='btn btn-success ms-auto px-5' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={handleUpdateProfile}> Update </button>                
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
@@ -154,8 +163,12 @@ function Profile() {
                 </div>
                 </div>
             </div>
+            
           </div>
         </div>
+      </div>
+      <div>
+        
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ import { AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai';
 
 function SellerProducts() {
     const [products, setProducts] = useState([]);
-    const sellerID='64384b08e5912cec3662aa18';
+    const sellerID=localStorage.getItem('userID');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -26,7 +26,7 @@ function SellerProducts() {
         <div className='row'>
             <div className='col-5'>
                 <h3 className='fw-bold my-3'> View your products</h3>
-                {products.map((product)=>(
+                {products.length>0?products.map((product)=>(
                     <div className="card mb-3 products bg-light shadow" key={product._id}>
                         <div className="row g-0">
                             <div className="col-md-4 mt-2">
@@ -53,7 +53,7 @@ function SellerProducts() {
                             </div>
                         </div>
                     </div>
-                ))}
+                )):<div className='fs-5 text-primary ms-5'>No products in the list. <br></br>Sell your first product!</div>}
             </div>
             <div className='col-6 py-4'>
                 <div className='border rounded p-3 text-center bg-success-subtle mt-2'>

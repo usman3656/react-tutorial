@@ -44,7 +44,17 @@ export default function LoginPage() {
   const [success, setSuccess] = useState(false);
 
   const setCookieFunction = (value) => {
-    localStorage.setItem("token", value);
+    localStorage.setItem("token", value.token);
+    localStorage.setItem("userID",value.data._id);
+    localStorage.setItem("username",value.data.username);
+    localStorage.setItem("firstName",value.data.firstName);
+    localStorage.setItem("lastName",value.data.lastName);
+    localStorage.setItem("phone",value.data.phone);
+    localStorage.setItem("address",value.data.address);
+    localStorage.setItem("city",value.data.city);
+    localStorage.setItem("country",value.data.country);
+    localStorage.setItem("role",value.data.role);
+    // console.log(value.data._id);
   };
 
   useEffect(() => {
@@ -64,9 +74,10 @@ export default function LoginPage() {
       setAuth({ username, password });
       setSuccess(true);
 
-      console.log(JSON.stringify(response.data));
+      // console.log(JSON.stringify(response.data));
 
-      setCookieFunction(response.data.token);
+      setCookieFunction(response.data);
+      window.history.back();
     } catch (err) {
       if (!err?.response) {
         setErr("No Server Response");
@@ -105,6 +116,7 @@ export default function LoginPage() {
                 <a href="/">Go to Home</a>
               </div>
             </Box>
+            
           ) : (
             <section>
               <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>

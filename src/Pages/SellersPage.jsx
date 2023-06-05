@@ -21,7 +21,8 @@ function SellersPage() {
           productImage: image,
           productCategory: category,
           availableQuantity: "1",
-          sellerID: "64384b08e5912cec3662aa18",
+          sellerID: localStorage.getItem('userID'),
+          productStatus:"Listed",
         };
       
         try {
