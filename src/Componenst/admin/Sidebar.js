@@ -43,7 +43,7 @@ const linkClasses ='px-3 w-100 mx-auto fs-5 py-2';
 
 export default function Sidebar() {
   return (
-    <div className='bg-dark-side vh-100 '>
+    <div className='bg-dark-side vh-100 ' style={{position: 'fixed'}}>
         <div className='d-flex gap-3 justify-content-center py-3'>
             <FcComboChart fontSize={35}/>
             <span className='text-white text-lg fs-5'> ADMIN PORTAL</span>

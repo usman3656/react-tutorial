@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import BarChartData from '../../utils/barChart';
+// import BarChartData from '../../utils/barChart';
+import axios from 'axios';
 
 // const data = [
 //   {
@@ -48,8 +49,24 @@ import BarChartData from '../../utils/barChart';
 // ];
 
 // console.log(data);
-const data=BarChartData;
+// const data=BarChartData;
 export default function BarGraph() {
+  const [data,setdata]=useState([]);
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('/admin/sales');
+        setdata(response.data);
+        console.log(response.data);
+        // setdata(response.data.totalProducts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div className=" bg-white p-4 rounded border ">
       <strong className="">Sales</strong>
@@ -67,7 +84,7 @@ export default function BarGraph() {
         >
           <CartesianGrid strokeDasharray="3 3 0 0" />
           <XAxis dataKey="name"  vertical={false} />
-          <YAxis/>
+          <YAxis domain={[0, 20]} />
           <Tooltip />
           <Legend />
           <Bar dataKey="Sales" fill="#82ca9d" />

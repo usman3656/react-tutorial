@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PieChartData from '../../utils/pieChart'
 import { PieChart, Pie, Cell, Legend } from 'recharts'
+import axios from 'axios'
 
-const data=PieChartData;
+// const data=PieChartData;
 const RADIAN = Math.PI / 180
 const COLORS = ['#14b8a6', '#0f766e', '#059669']
 
@@ -19,6 +20,20 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 }
 
 export default function PieCHart() {
+
+	const[data,setData]=useState([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const response = await axios.get('/admin/productStats');
+            setData(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchProducts();
+      }, []);
   return (
     <div className="bg-white p-4 border">
       <strong className="text-gray-700">Products</strong>

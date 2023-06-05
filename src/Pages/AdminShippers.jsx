@@ -17,6 +17,26 @@ function AdminShippers() {
     };
     fetchProducts();
   }, []);
+
+  const updateStatus = async (shipperID, shipperStatus) => {
+    try {
+      const response = await axios.patch('/admin/update-shipper-status', {
+        shipperID: shipperID,
+        shipperStatus: shipperStatus
+      });
+      console.log(response.data);
+      
+      // Update the shipper status in the local state
+      setShippers(prevShippers =>
+        prevShippers.map(shipper =>
+          shipper._id === shipperID ? { ...shipper, shipperStatus: shipperStatus } : shipper
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='bg-white m-3 border p-3'>
       <div className='m-3 fw-bold'>Shippers</div>
@@ -43,8 +63,8 @@ function AdminShippers() {
                     <HiDotsVertical/>
                   </button>
                   <ul className="dropdown-menu">
-                      <li><button className="dropdown-item" >Booked</button></li>                                            
-                      <li><button className="dropdown-item" >Available</button></li>                                        
+                      <li><button className="dropdown-item" onClick={() => updateStatus(shipper._id, 'booked')}>Booked</button></li>                                            
+                      <li><button className="dropdown-item" onClick={() => updateStatus(shipper._id, 'available')}>Available</button></li>                                        
                   </ul>
                 </div>
               </td>

@@ -1,9 +1,29 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { HiChartPie, HiShoppingCart } from 'react-icons/hi';
 import { IoMdContacts } from 'react-icons/io';
 import { IoBagHandle } from 'react-icons/io5'
 
 export default function DashboardGrid() {
+    const[products,setProducts]=useState(0);
+    const[orders,setOrders]=useState(0);
+    const[users,setUsers]=useState(0);
+    const[soldProds,setSoldProds]=useState(0);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const response = await axios.get('/admin/statistics');
+            setProducts(response.data.totalProducts);
+            setOrders(response.data.totalOrders);
+            setSoldProds(response.data.soldProducts);
+            setUsers(response.data.totalUsers);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchProducts();
+      }, []);
   return (
     <div className='d-flex gap-2 w-full m-3'>
         <BoxWrapper>
@@ -15,7 +35,7 @@ export default function DashboardGrid() {
                     Total Products
                 </span>
                 <div className=''>
-                    <strong className=''>$500.00</strong>
+                    <strong className=''>{products}</strong>
                 </div>
             </div>
         </BoxWrapper>
@@ -28,7 +48,7 @@ export default function DashboardGrid() {
                     Total Sales
                 </span>
                 <div className=''>
-                    <strong className=''>200</strong>
+                    <strong className=''>{soldProds}</strong>
                 </div>
             </div>
         </BoxWrapper>
@@ -41,7 +61,7 @@ export default function DashboardGrid() {
                     Total Users
                 </span>
                 <div className=''>
-                    <strong className=''>1200</strong>
+                    <strong className=''>{users}</strong>
                 </div>
             </div>
         </BoxWrapper>
@@ -54,7 +74,7 @@ export default function DashboardGrid() {
                     Total Orders
                 </span>
                 <div className=''>
-                    <strong className=''>10000</strong>                    
+                    <strong className=''>{orders}</strong>                    
                 </div>
             </div>
         </BoxWrapper>

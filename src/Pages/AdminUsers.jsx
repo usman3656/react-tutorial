@@ -18,6 +18,20 @@ function AdminUsers() {
     fetchProducts();
   }, []);
 
+  const deleteUser = async (username) => {
+    try {
+      await axios.delete('/admin/delete_user', {
+        data: {
+          username: username
+        }
+      });
+      // Assuming the API call is successful, you can update the users list in the state
+      setUsers(prevUsers => prevUsers.filter(user => user.username !== username));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='bg-white m-3 border p-3'>
       <div className='m-3 fw-bold'>Users</div>
@@ -47,7 +61,7 @@ function AdminUsers() {
               <td>{user.country}</td>
               <td>{user.role}</td>
               <td>
-                <div className='btn'><HiTrash className='text-danger ' size={20}/></div>
+                <div className='btn' onClick={() => deleteUser(user.username)}><HiTrash className='text-danger ' size={20}/></div>
               </td>
             </tr>
           ))}

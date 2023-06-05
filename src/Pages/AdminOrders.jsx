@@ -18,6 +18,26 @@ function AdminOrders() {
     fetchProducts();
   }, []);
 
+  const updateOrderStatus = async (orderID, newStatus) => {
+    try {
+      await axios.patch('/admin/update-order-status', {
+        orderID: orderID,
+        orderStatus: newStatus
+      });
+      // Assuming the API call is successful, you can update the order status in the state
+      setOrders(prevOrders => {
+        return prevOrders.map(order => {
+          if (order._id === orderID) {
+            return { ...order, orderStatus: newStatus };
+          }
+          return order;
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   function convertTimestampToDate(timestamp) {
     const date = new Date(timestamp);
   
@@ -66,9 +86,9 @@ function AdminOrders() {
                     <HiDotsVertical/>
                   </button>
                   <ul className="dropdown-menu">
-                      <li><button className="dropdown-item" >Pending</button></li>                                            
-                      <li><button className="dropdown-item" >Shipped</button></li>                                        
-                      <li><button className="dropdown-item" >Delivered</button></li>
+                      <li><button className="dropdown-item" onClick={() => updateOrderStatus(order._id, 'Pending')}>Pending</button></li>                                            
+                      <li><button className="dropdown-item" onClick={() => updateOrderStatus(order._id, 'Shipped')}>Shipped</button></li>                                        
+                      <li><button className="dropdown-item" onClick={() => updateOrderStatus(order._id, 'Delivered')}>Delivered</button></li>
                   </ul>
                 </div>
               </td>
