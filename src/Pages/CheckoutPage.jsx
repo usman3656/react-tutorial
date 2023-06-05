@@ -18,7 +18,7 @@ function CheckoutPage() {
   const [type,setType]=useState('');
   const [order,setOrder]=useState('');
 
-  const id=localStorage.getItem('userID')//'643689de643a5e73aa5e56b2'//'64384b08e5912cec3662aa18' //will be changed after signin details stored
+  const id=localStorage.getItem('userID')
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -211,7 +211,7 @@ function CheckoutPage() {
                 <Link to={'/'}>
                   <button type="button" class="btn btn-outline-warning">Contniue shopping</button>
                 </Link>
-                <button type="button" class="btn btn-warning">Track Order</button>
+                <Link to={'/order'}><button type="button" class="btn btn-warning">Track Order</button></Link>
               </div>
           </div>
         }

@@ -18,6 +18,18 @@ input[type=file]::file-selector-button {
   width: 70px;
 }
 
+.bg-dark-side{
+  background-color: #014d43 !important;
+}
+
+.dropdown-toggle::after{
+  display: none;
+}
+
+.bg-light{
+  background-color: #eeeeee34 !important;
+}
+
 a{
   text-decoration: none;
 }

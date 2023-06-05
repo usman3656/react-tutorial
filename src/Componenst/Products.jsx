@@ -9,14 +9,12 @@ function Products({categ}) {
     const fetchData = async () => {
       try {
         let response;
-        console.log('this'+categ);
         if(categ==null)
           {
             response = await axios.get(`/user/get-products`);
           }
         else 
           {
-            console.log('categ api');
             response = await axios.get(`/user/get-productbycateg/${categ}`);
           }
         setProducts(response.data.product);

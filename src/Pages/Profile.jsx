@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ProfileImage from '../profile.jpg';
 import { AiOutlineClose } from 'react-icons/ai';
-import {FiLogOut} from 'react-icons/fi'
-import userData from '../utils/userData';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function Profile() {
-  // const id='643689de643a5e73aa5e56b2'//'64384b08e5912cec3662aa18' //will be changed after signin details stored
   const id=localStorage.getItem('userID');    
   const [data, setData] = useState({
     firstName: '',
