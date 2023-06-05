@@ -2,35 +2,34 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function Products({categ}) {  
+function Products({categ,search}) {  
   const [products, setProducts] = useState([]);  
+  console.log(search);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      try {        
         let response;
-        if(categ==null)
-          {
-            response = await axios.get(`/user/get-products`);
-          }
-        else 
-          {
-            response = await axios.get(`/user/get-productbycateg/${categ}`);
-          }
+        if (search) {
+          console.log('here');
+          response = await axios.get(`user/search?query=${search}`);
+        } else if (categ) {
+          response = await axios.get(`/user/get-productbycateg/${categ}`);
+        } else {
+          response = await axios.get(`/user/get-products`);
+        }
         setProducts(response.data.product);
       } catch (error) {
         console.log('Error fetching products:', error);
       }
     };
     fetchData();
-  }, [categ]);
+  }, [categ,search]);
 
   return (
     <div className='my-4'>
         <span className='fw-bold m-2'>{categ?categ.toUpperCase():'ALL CATEGORIES'}</span>
         <br/>
-        {console.log(products)}
-
          {products.map((product)=>(
         <Link to={`/product/${product._id}`} key={product._id}>
             <button className='btn mt-2' >

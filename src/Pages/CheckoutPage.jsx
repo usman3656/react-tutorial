@@ -103,7 +103,6 @@ function CheckoutPage() {
         user: id,
         paymentType: type
       };
-      console.log(orderData);
   
       const response = await axios.post('/user/create-order', orderData);
       const createdOrder = response.data.order;

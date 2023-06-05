@@ -54,7 +54,6 @@ export default function LoginPage() {
     localStorage.setItem("city",value.data.city);
     localStorage.setItem("country",value.data.country);
     localStorage.setItem("role",value.data.role);
-    // console.log(value.data._id);
   };
 
   useEffect(() => {
@@ -73,8 +72,6 @@ export default function LoginPage() {
       setPassword("");
       setAuth({ username, password });
       setSuccess(true);
-
-      // console.log(JSON.stringify(response.data));
 
       setCookieFunction(response.data);
       response.data.data.role==='Admin'?window.location.href = '/admin':window.location.href='/';

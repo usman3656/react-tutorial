@@ -30,7 +30,6 @@ function OrdersPage() {
 
       const handleOrderDetails=(order)=>{
         setSelectedOrder(order);
-        console.log(selectedOrder);
       }
 
       function convertTimestampToDate(timestamp) {

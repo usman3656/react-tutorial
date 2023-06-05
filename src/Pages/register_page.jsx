@@ -75,14 +75,11 @@ export default function SignUp() {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(response.data, response.message);
-
       setCookieFunction(response.data.token);
 
       setAuth({ data });
       setSuccess(true);
 
-      console.log(JSON.stringify(response?.data));
     } catch (err) {
       if (!err?.response) {
         setErr("No Server Response");

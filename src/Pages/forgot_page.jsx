@@ -62,12 +62,9 @@ export default function ForgotPassword() {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(response);
-
       setAuth({ data });
       setSuccess(true);
 
-      console.log(JSON.stringify(response?.data));
     } catch (err) {
       if (!err?.response) {
         setErr("No Server Response");

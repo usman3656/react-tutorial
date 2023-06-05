@@ -9,7 +9,6 @@ function Cart() {
     const clearItemHandler = (cartItem) => clearItemFromCart(cartItem);
   return (
     <div className='d-flex'>
-    {console.log(cartItems)}
         <div className='offset-1 col-6'>
             <h3 className='fw-bold'>Cart:</h3>
             <div className='bg-light border-top border-bottom border-success border-3 py-2'>

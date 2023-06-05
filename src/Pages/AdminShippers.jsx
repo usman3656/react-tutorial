@@ -24,9 +24,7 @@ function AdminShippers() {
         shipperID: shipperID,
         shipperStatus: shipperStatus
       });
-      console.log(response.data);
       
-      // Update the shipper status in the local state
       setShippers(prevShippers =>
         prevShippers.map(shipper =>
           shipper._id === shipperID ? { ...shipper, shipperStatus: shipperStatus } : shipper

@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 import {HiOutlineShoppingBag} from 'react-icons/hi'
 
 
-function Header() {
-    
-    const {search,setSearch}=useState(); // will be used for search bar
+function Header({setSearch}) {
+    const [searchQuery, setSearchQuery] = useState('');  
     const [isSell, setIsSell] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
     const userID=localStorage.getItem('userID');
@@ -19,6 +18,10 @@ function Header() {
     
         setLoggedIn(isLoggedIn);
       }, []);
+
+      const handleSearch = () => {
+        setSearch(searchQuery);
+      };
    
     const handleClick = () => {
         setIsSell(!isSell);
@@ -34,18 +37,19 @@ function Header() {
         localStorage.removeItem('phone');
         localStorage.removeItem('address');
         localStorage.removeItem('city');
-        localStorage.removeItem('country');  
+        localStorage.removeItem('country');
+        localStorage.removeItem('role');  
     }
 
 
   return (
     <div className='header'>
-        <nav className="navbar bg-dark" data-bs-theme="dark">
+        <nav className="navbar bg-dark" data-bs-theme="dark" >
             <div className="container-fluid d-flex justify-content-start">
                 <a className="navbar-brand" href='#'>New2U</a> {/*LOGO image will be added here*/}
                 <form className="d-flex offset-1 me-auto" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline-success" type="submit">Search</button>
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+                    <button className="btn btn-outline-success" type="button" onClick={handleSearch}>Search</button>
                 </form>
                 <Link to={!loggedIn?'login':isSell?'seller':''}>
                     <button className='btn btn-success rounded-pill me-3 d-flex pe-4' onClick={handleClick}>

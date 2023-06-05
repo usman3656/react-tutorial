@@ -6,9 +6,9 @@ import motors from '../motors.jpg'
 import Products from '../Componenst/Products';
 import { useState } from 'react';
 
-function LandingPage() {
-
+function LandingPage({search}) {
   const [categ,setCateg]=useState(null);
+  // console.log(search);
 
   const handleCategory=(categ)=>{    
     setCateg(categ);
@@ -51,7 +51,7 @@ function LandingPage() {
           </div>
         </button>
       ))}
-      <Products categ={categ}/>
+      <Products categ={categ} search={search}/>
     </div>
   )
 }

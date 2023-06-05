@@ -21,14 +21,20 @@ import AdminProducts from "./Pages/AdminProducts";
 import AdminOrders from "./Pages/AdminOrders";
 import AdminUsers from "./Pages/AdminUsers";
 import AdminShippers from "./Pages/AdminShippers";
+import { useState } from "react";
 
 function App() {
+  const[search,setSearch]=useState(null);
+  const handleSearch = (query) => {
+    setSearch(query);
+  };
+  // console.log(search);
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout/>}>
-            <Route index element={<LandingPage/>}/>
+          <Route path="/" element={<Layout setSearch={setSearch}/>}>
+            <Route index element={<LandingPage search={search}/>}/>
             <Route path='product/:id' element={<Product/>}/>    
             <Route path='cart' element={<Cart/>}/>
             <Route path='checkout' element={<AddressPage/>}/>
