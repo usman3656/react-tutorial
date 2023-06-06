@@ -48,11 +48,20 @@ export default function SignUp() {
     phone: "",
     city: "",
     country: "",
-    role: "",
+    role: "User",
   });
 
   const setCookieFunction = (value) => {
-    localStorage.setItem("token", value);
+    localStorage.setItem("token", value.token);
+    localStorage.setItem("userID",value.data._id);
+    localStorage.setItem("username",value.data.username);
+    localStorage.setItem("firstName",value.data.firstName);
+    localStorage.setItem("lastName",value.data.lastName);
+    localStorage.setItem("phone",value.data.phone);
+    localStorage.setItem("address",value.data.address);
+    localStorage.setItem("city",value.data.city);
+    localStorage.setItem("country",value.data.country);
+    localStorage.setItem("role",value.data.role);
   };
 
   const [err, setErr] = useState("");
@@ -75,10 +84,11 @@ export default function SignUp() {
         headers: { "Content-Type": "application/json" },
       });
 
-      setCookieFunction(response.data.token);
+      setCookieFunction(response.data);      
 
       setAuth({ data });
       setSuccess(true);
+      window.location.href='/'
 
     } catch (err) {
       if (!err?.response) {
@@ -148,9 +158,7 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <TextField required fullWidth id="address" label="Address" name="address" onChange={HandleChange} />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField required fullWidth id="role" label="Role" name="role" onChange={HandleChange} />
-                  </Grid>
+                  
                   <Grid item xs={12} sm={6}>
                     <TextField required fullWidth id="phone" label="Phone" name="phone" onChange={HandleChange} />
                   </Grid>

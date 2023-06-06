@@ -34,7 +34,7 @@ function Products({categ,search}) {
         <Link to={`/product/${product._id}`} key={product._id}>
             <button className='btn mt-2' >
                 <div className="card shadow">
-                    <img src={product.productImage[0]} className="card-img-top img-fluid" alt="..." />            
+                    <img src={product.productImage[0]} className="card-img-top img-fluid" alt="..." style={{ width: '210px', height: '210px' }}/>            
                     <h5 className="card-title ">{product.productName}</h5>
                     <div className="card-body d-flex justify-content-between">
                         <p className='text-primary'>Rs. <span className='fw-bold'>{product.productPrice}</span></p>
