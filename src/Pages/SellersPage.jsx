@@ -1,51 +1,46 @@
 import {React,useState} from 'react';
 import axios from 'axios';
-// import img from '../utils/samsung1.jpg';
-// import img2 from '../utils/samsung2.jpg'
+import img from '../utils/samsung1.jpg';
+import img2 from '../utils/samsung2.jpg'
 axios.defaults.baseURL = 'http://localhost:3000';
 
 function SellersPage() {
     const [category, setCategory] = useState('');
     const [productName, setProductName] = useState('');
     const [productPrice, setProductPrice] = useState('');
-    const [productDescription, setProductDescription] = useState('');
-    const [image, setImage] = useState([]);    
+    const [productSize, setProductSize] = useState('');
+
+    const [productColor, setProductColor] = useState('');
+
+    const [productDescription, setProductDescription] = useState('');  
+    const [images,setImages] = useState([]);
+
+    const handleChange = (event) => {
+        setImages(event.target.files);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
       
-        // const productData = {
-        //   productName: productName,
-        //   productDescription: productDescription,
-        //   productPrice: productPrice,
-        //   productImage: image,
-        //   productCategory: category,
-        //   availableQuantity: "1",
-        //   sellerID: localStorage.getItem('userID'),
-        //   productStatus:"Listed",
-        // };
         const formData = new FormData();
 
         formData.append('productName', productName);
         formData.append('productDescription', productDescription);
         formData.append('productPrice', productPrice);
+        formData.append('productColor', productColor);
+        formData.append('productSize', productSize);
+
         formData.append('productCategory', category);
         formData.append('availableQuantity', '1');
         formData.append('sellerID', localStorage.getItem('userID'));
         formData.append('productStatus', 'Listed');
-
-        const imageInput = document.getElementById('image-input');
-    for (let i = 0; i < imageInput.files.length; i++) {
-      formData.append('image', imageInput.files[i]);
-    }
+          console.log(images);
+        for (const image of images) {
+            formData.append('image', image);
+        }
       
         try {
-          console.log(image);
-          const response = await axios.post('/user/add-product', formData,{
-            headers: {
-              'Content-Type': 'multipart/form-data' // Important header for file uploads
-            }
-          });
+          const response = await axios.post('/user/add-product', formData);
           console.log('Product added successfully:', response.data);
         } catch (error) {
           console.error('Error adding product:', error);
@@ -60,19 +55,6 @@ function SellersPage() {
         }
       };     
       
-      // const handleFileSelect = (event) => {
-      //   const fileList = event.target.files;
-      //   // console.log(fileList);
-      //   const formData = new FormData();
-      //   // console.log(formData);
-      
-      //   for (let i = 0; i < fileList.length; i++) {
-      //     const file = fileList[i];
-      //     formData.append('image', file);
-      //   }
-      
-      //   setImage(fileList);        
-      // };
   return (
     <div className='bg-light border-top border-bottom border-4 border-success'>
         <h4 className='mx-4 mt-4'>Product Information</h4>
@@ -81,7 +63,6 @@ function SellersPage() {
             <span className='text-danger'> * </span> 
             are mandatory)
         </p>
-        {/* <CloudinaryContext cloudName="drljnpqvs"> */}
             <form className='m-5' onSubmit={handleSubmit}>
                 <div className='d-flex mb-2'>
                     <label className='sellerForm-label'>
@@ -114,7 +95,7 @@ function SellersPage() {
                 </div>
                 <div className='d-flex mb-2'>
                     <label className='sellerForm-label'>Image: </label>
-                    <input className='form-control sellerForm-input' type='file' name='image' id='image-input' multiple ></input>
+                    <input className='form-control sellerForm-input' type='file' name='image' id='formFile' onChange={handleChange} multiple ></input>
                 </div>
                 <div className='d-flex mb-2'>
                     <label className='sellerForm-label'></label>

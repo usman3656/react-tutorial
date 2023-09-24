@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react'
 import {FcComboChart} from 'react-icons/fc';
+import {FiLogOut} from 'react-icons/fi'
 import { HiOutlineLogout } from 'react-icons/hi';
 import { Link, useLocation } from 'react-router-dom';
 import {HiOutlineViewGrid,HiOutlineCube,HiOutlineShoppingCart,HiOutlineUsers,HiOutlineDocumentText} from 'react-icons/hi'
@@ -42,6 +43,19 @@ const DASHBOARD_SIDEBAR_LINKS = [
 const linkClasses ='px-3 w-100 mx-auto fs-5 py-2';
 
 export default function Sidebar() {
+	const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userID');
+        localStorage.removeItem('username');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('lastName');
+        localStorage.removeItem('phone');
+        localStorage.removeItem('address');
+        localStorage.removeItem('city');
+        localStorage.removeItem('country');
+        localStorage.removeItem('role');  
+		window.location.href='/login'
+    }
   return (
     <div className='bg-dark-side vh-100 ' style={{position: 'fixed'}}>
         <div className='d-flex gap-3 justify-content-center py-3'>
@@ -55,6 +69,9 @@ export default function Sidebar() {
             </div>
           ))}
         </div>
+		<div className=' ms-4 mb-3 mt-5 pt-5 fixed-bottom'>
+			<div className='text-danger fw-bold btn' onClick={logout}><FiLogOut/> Logout</div>
+		</div>
     </div>
   )
 }

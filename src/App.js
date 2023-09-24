@@ -40,11 +40,11 @@ function App() {
             <Route path='checkout' element={<AddressPage/>}/>
             <Route path='profile' element={<Profile/>}/>
             <Route path='order' element={<OrdersPage/>}/>
-            <Route path='seller' element={<SellerProducts/>}/>
-            <Route path='seller/add-product' element={<SellersPage/>}/>
+            <Route path='seller' element={localStorage.getItem('userID')?<SellerProducts/>:<div>Login required</div>}/>
+            <Route path='seller/add-product' element={localStorage.getItem('userID')?<SellersPage/>:<div>Login required</div>}/>
             <Route path='seller/update-product/:id' element={<UpdateProduct/>}/>
           </Route>
-          <Route path="/admin/" element={<AdminLayout/>}>
+          <Route path="/admin/" element={localStorage.getItem('role')==='Admin'?<AdminLayout/>:<div className='text-center my-5 fw-bold fs-1'>Unauthorized</div> }>
             <Route index element={<Admin/>}/>
             <Route path='products' element={<AdminProducts/>}/>
             <Route path='orders' element={<AdminOrders/>}/>
@@ -56,8 +56,6 @@ function App() {
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/" element={<ShopPage />} /> */}
-          {/* <Route path="/test" element={<ShopPage/>}/> */}
           <Route path="*" exact element={"ERROR 404 not found"} />
         </Routes>
       </BrowserRouter>

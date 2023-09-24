@@ -7,10 +7,10 @@ function UpdateProduct() {
     const { id } = useParams();
     const [product,setProduct]=useState(null);   
     const [formData, setFormData] = useState({
-        category: '',
-        name: '',
-        price: '',
-        description: '',
+        productCategory: '',
+        productName: '',
+        productPrice: '',
+        productDescription: '',
         image: '',
       });
 
@@ -18,14 +18,14 @@ function UpdateProduct() {
     useEffect(() => {
         const fetchProduct = async () => {
         try {
-            const response = await axios.get(`/user/get-products/${id}`);
+            const response = await axios.get(`/user/get-products/${id}`); 
             const productData = response.data.product;
             setProduct(productData);
             setFormData({
-                category: productData.category,
-                name: productData.name,
-                price: productData.price,
-                description: productData.description,
+                productCategory: productData.productCategory,
+                productName: productData.productName,
+                productPrice: productData.productPrice,
+                productDescription: productData.productDescription,
                 image: productData.image,
               });
         } catch (error) {
@@ -46,14 +46,14 @@ function UpdateProduct() {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const { category, name, price, description, image } = formData;
+          const { productCategory, productName, productPrice, productDescription, image} = formData;
           const updatedProduct = await axios.patch(`user/update-product`, {
             productID: id,
-            productName: name,
-            productDescription: description,
-            productPrice: price,
+            productName: productName,
+            productDescription: productDescription,
+            productPrice: productPrice,
             productImage: image,
-            productCategory: category,
+            productCategory: productCategory,
             availableQuantity: product.availableQuantity,
           });
           console.log('Product updated:', updatedProduct);
@@ -73,9 +73,9 @@ function UpdateProduct() {
         </p>
         <form className='m-5' onSubmit={handleSubmit}>
             <div className='d-flex mb-2'>
-                <label htmlFor='select1' className='sellerForm-label'>Category: <span className='text-danger'> * </span></label>
-                <select className="form-select sellerForm-input" aria-label="Default select example" id='select1' value={formData.category} name='category' onChange={handleInputChange}>
-                    <option selected>Select Category</option>
+                <label htmlFor='select1' className='sellerForm-label'>productCategory: <span className='text-danger'> * </span></label>
+                <select className="form-select sellerForm-input" aria-label="Default select example" id='select1' value={formData.productCategory} name='productCategory' onChange={handleInputChange}>
+                    <option selected>Select productCategory</option>
                     <option value="Electronics">Electronics</option>
                     <option value="CLothing">Clothing</option>
                     <option value="Accessories">Accessories</option>
@@ -84,16 +84,16 @@ function UpdateProduct() {
             </div>
             <div className='d-flex mb-2'>
                 <label htmlFor='input1' className='sellerForm-label'>Product Name: <span className='text-danger'> * </span></label>
-                <input className='form-control sellerForm-input' placeholder='Name' id='input1' name='name' value={formData.name} onChange={handleInputChange}></input>
+                <input className='form-control sellerForm-input' placeholder='Name' id='input1' name='productName' value={formData.productName} onChange={handleInputChange}></input>
             </div>
             <div className='d-flex mb-2'>
-                <label className='sellerForm-label'>Product Price (in in PKR): <span className='text-danger'> * </span></label>
+                <label className='sellerForm-label'>Product productPrice: <span className='text-danger'> * </span></label>
                 <span className="input-group-text">Rs.</span>
-                <input className='form-control sellerForm-inputwithText' placeholder='Price' name='price' value={formData.price} onChange={handleInputChange}></input>
+                <input className='form-control sellerForm-inputwithText' placeholder='productPrice' name='productPrice' value={formData.productPrice} onChange={handleInputChange}></input>
             </div>
             <div className='d-flex mb-2'>
-                <label className='sellerForm-label'>Product Description: </label>
-                <textarea className='form-control sellerForm-input' type='text' rows="5" name='description' value={formData.description} onChange={handleInputChange}></textarea>
+                <label className='sellerForm-label'>Product productDescription: </label>
+                <textarea className='form-control sellerForm-input' type='text' rows="5" name='productDescription' value={formData.productDescription} onChange={handleInputChange}></textarea>
             </div>
             <div className='d-flex mb-2'>
                 <label className='sellerForm-label'>Image: </label>
