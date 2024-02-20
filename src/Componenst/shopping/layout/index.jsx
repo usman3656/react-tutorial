@@ -10,7 +10,7 @@ function Layout({setSearch}) {
   return (
     <div>
         <Header setSearch={setSearch}/>    
-        <div className='m-4'>
+        <div className='m-4 '>
           <Outlet/>
         </div>    
     </div>
