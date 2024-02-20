@@ -1,7 +1,7 @@
+import React from "react";
+import { useContext, useState, createContext } from "react";
 import { Item } from "../Componenst/shopping/Counter"
 import {useNavigate} from "react-router-dom"
-import { useContext, useState } from "react";
-import { createContext } from "react";
 
 export const ThemeContext = createContext();
 
